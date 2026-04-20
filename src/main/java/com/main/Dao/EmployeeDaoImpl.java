@@ -27,6 +27,32 @@ public class EmployeeDaoImpl implements EmployeeDao{
         return employeeList;
     }
 
+    @Override
+    public Employee findbyId(int i) {
+
+          return  Entmanager.find(Employee.class,i);
+    }
+
+    @Override
+    public void updateEmployee(int id, String parameter, String value) {
+        
+        Employee obj = Entmanager.find(Employee.class,id);
+        if(parameter.equalsIgnoreCase("firstname"))
+        {
+            obj.setFirstName(value);
+        }
+        else if (parameter.equalsIgnoreCase("lastname"))
+        {
+            obj.setLastName(value);
+        }
+        else if (parameter.equalsIgnoreCase("dept"))
+        {
+            obj.setDepartment(value);
+        }
+        Entmanager.merge(obj);
+
+    }
+
     
 
 }

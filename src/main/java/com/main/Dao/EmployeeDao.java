@@ -7,4 +7,8 @@ public interface EmployeeDao {
 
     List<Employee> findAll();
 
+    Employee findbyId(int i);
+
+    public void updateEmployee(int id, String parameter, String value);
+
 }

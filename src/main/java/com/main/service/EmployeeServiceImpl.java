@@ -38,4 +38,11 @@ public class EmployeeServiceImpl implements Employeeservice{
         daoobj.updateEmployee(id, parameter, value);
     }
 
+    @Override
+    @Transactional
+    public Employee serviceSave(Employee emp) {
+        
+        return daoobj.Save(emp);
+    }
+
 }

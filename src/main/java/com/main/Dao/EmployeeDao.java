@@ -11,4 +11,6 @@ public interface EmployeeDao {
 
     public void updateEmployee(int id, String parameter, String value);
 
+    public Employee Save(Employee emp);
+
 }

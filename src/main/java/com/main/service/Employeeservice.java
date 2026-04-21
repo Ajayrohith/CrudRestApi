@@ -11,4 +11,6 @@ public interface Employeeservice {
 
      public void serviceupdateEmployee(int id, String parameter, String value);
 
+     Employee serviceSave(Employee emp);
+
 }

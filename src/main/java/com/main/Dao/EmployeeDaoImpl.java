@@ -53,6 +53,18 @@ public class EmployeeDaoImpl implements EmployeeDao{
 
     }
 
+    @Override
+    public Employee Save(Employee emp) {
+        
+
+        ///The below merge function returns the updated object 
+        /// for Example the emp initially contains only firstname,lastname and dept
+        /// but after merge it will return the object along with the id generated
+        Employee  updatedobj = Entmanager.merge(emp);
+        return updatedobj;
+        
+    }
+
     
 
 }

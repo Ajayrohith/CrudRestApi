@@ -1,7 +1,9 @@
 package com.main.Rest;
 
 import java.util.List;
+import java.util.Map;
 
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PatchMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -14,15 +16,20 @@ import org.springframework.web.bind.annotation.RestController;
 import com.main.Entity.Employee;
 import com.main.service.Employeeservice;
 
+import tools.jackson.databind.json.JsonMapper;
+
 @RestController
 @RequestMapping("/api")
 public class EmployeeRestController {
 
     private Employeeservice EmpService;
 
-    public EmployeeRestController(Employeeservice EmpService)
+    private JsonMapper jsonMapper;
+
+    public EmployeeRestController(Employeeservice EmpService,JsonMapper jsonMapper)
     {
         this.EmpService = EmpService;
+        this.jsonMapper =  jsonMapper;
     }
 
     @GetMapping("/employees")
@@ -82,9 +89,24 @@ public class EmployeeRestController {
     }
 
     @PatchMapping("/employees/{id}")
-    public Employee partialupdate(@RequestBody Employee emp,@PathVariable int id)
+    public Employee patchEmployeeDetails(@PathVariable int id, @RequestBody Map<String,Object> patchMap)
     {
-        emp.setId(id);
-        return EmpService.serviceSave(emp);
+        Employee temEmp = EmpService.serviceFindbyId(id);
+        if(temEmp == null)
+        {
+            throw new RuntimeException("There is no employee data for the given id "+id);
+        }
+        Employee patchedEmployee = jsonMapper.updateValue(temEmp,patchMap);
+
+        Employee DbEmployee = EmpService.serviceSave(patchedEmployee);
+
+        return DbEmployee;
+    }
+
+    @DeleteMapping("/employees/{id}")
+    public List<Employee> deleteEmployee(@PathVariable int id)
+    {
+        EmpService.serviceDeleteEmpl(id);
+        return EmpService.servicefindAll();
     }
 }

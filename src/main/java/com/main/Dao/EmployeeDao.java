@@ -13,4 +13,6 @@ public interface EmployeeDao {
 
     public Employee Save(Employee emp);
 
+    public void removeEmployee(int id);
+
 }

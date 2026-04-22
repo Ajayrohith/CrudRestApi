@@ -13,4 +13,6 @@ public interface Employeeservice {
 
      Employee serviceSave(Employee emp);
 
+     public void serviceDeleteEmpl(int id);
+
 }

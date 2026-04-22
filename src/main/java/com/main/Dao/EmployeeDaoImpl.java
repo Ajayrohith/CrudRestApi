@@ -65,6 +65,13 @@ public class EmployeeDaoImpl implements EmployeeDao{
         
     }
 
+    @Override
+    public void removeEmployee(int id) {
+        
+        Employee emp = Entmanager.find(Employee.class, id);
+        Entmanager.remove(emp);
+    }
+
     
 
 }

@@ -45,4 +45,10 @@ public class EmployeeServiceImpl implements Employeeservice{
         return daoobj.Save(emp);
     }
 
+    @Override
+    @Transactional
+    public void serviceDeleteEmpl(int id) {
+         daoobj.removeEmployee(id);
+    }
+
 }

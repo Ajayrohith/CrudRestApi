@@ -15,4 +15,6 @@ public interface EmployeeDao {
 
     public void removeEmployee(int id);
 
+    public Employee findEmployeeByUsername(String firstName);
+
 }

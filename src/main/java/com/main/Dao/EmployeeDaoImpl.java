@@ -72,6 +72,14 @@ public class EmployeeDaoImpl implements EmployeeDao{
         Entmanager.remove(emp);
     }
 
+    @Override
+    public Employee findEmployeeByUsername(String firstName) {
+        Employee emp =Entmanager.createQuery("Select e from Employee e where e.firstName = :name ",Employee.class).setParameter("name", firstName)
+        .getSingleResult();
+
+        return emp;
+    }
+
     
 
 }
